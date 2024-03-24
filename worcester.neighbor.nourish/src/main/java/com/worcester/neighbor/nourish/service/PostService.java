@@ -17,15 +17,16 @@ public class PostService {
 
     public boolean postFood(FoodInfo foodInfo) {
         try {
-            Food food = foodRepository.findByRestaurantAndFood(foodInfo.getRestaurant(), foodInfo.getFood());
+            Food food = foodRepository.findByRestusernameAndFoodtypeAndFoodname(foodInfo.getRestUserName(), foodInfo.getFoodType(), foodInfo.getFoodName());
             if (food != null) {
                 int amount = food.getAmount();
                 amount += foodInfo.getAmount();
                 food.setAmount(amount);
             } else {
                 food = new Food();
-                food.setRestaurant(foodInfo.getRestaurant());
-                food.setFood(foodInfo.getFood());
+                food.setRestusername(foodInfo.getRestUserName());
+                food.setFoodname(foodInfo.getFoodName());
+                food.setFoodtype(foodInfo.getFoodType());
                 food.setAmount(foodInfo.getAmount());
             }
             foodRepository.saveAndFlush(food);

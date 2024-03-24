@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodInfo {
-    String restaurant;
-    String food;
+    String restUserName;
+    String restName;
+    String address;
+    String foodType;
+    String foodName;
     int amount;
 }

@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostRequest {
-    String restaurant;
-    String food;
+    String restUserName;
+    String restName;
+    String foodName;
+    String foodType;
     int amount;
 }

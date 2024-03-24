@@ -15,25 +15,37 @@ public class AccountRegister {
     @Autowired
     public AccountRegister(RegisterService registerService) {this.registerService = registerService; }
 
-    @GetMapping
+    @PostMapping
     public RegisterResponse register(@RequestBody RegisterRequest registerRequest) {
         RegisterResponse registerResponse = new RegisterResponse();
         String registerOutput = "No registration info!";
+
         if (registerRequest != null) {
-            if (registerRequest.getRestaurantId() != null) {
+            if (registerRequest.getRestUserName() != null) {
                 registerOutput = registerService.registerRestaurant(
-                        registerRequest.getRestaurantId(),
-                        registerRequest.getRestaurantName(),
+                        registerRequest.getRestUserName(),
+                        registerRequest.getRestName(),
                         registerRequest.getPassword(),
                         registerRequest.getPhone(),
-                        registerRequest.getAddress()
+                        registerRequest.getAddress(),
+                        registerRequest.getEmail()
                 );
-            } else if (registerRequest.getUserId() != null) {
-                registerOutput = registerService.registerUser(
-                        registerRequest.getUserId(),
-                        registerRequest.getUserName(),
+            } else if (registerRequest.getCusUserName() != null) {
+                registerOutput = registerService.registerCustomer(
+                        registerRequest.getCusUserName(),
+                        registerRequest.getCusName(),
                         registerRequest.getPassword(),
-                        registerRequest.getPhone()
+                        registerRequest.getPhone(),
+                        registerRequest.getEmail()
+                );
+            } else if (registerRequest.getOrgUserName() !=null) {
+                registerOutput = registerService.registerOrganization(
+                        registerRequest.getOrgUserName(),
+                        registerRequest.getOrgName(),
+                        registerRequest.getPassword(),
+                        registerRequest.getType(),
+                        registerRequest.getEmail(),
+                        registerRequest.getCertificateNum()
                 );
             } else {
                 registerOutput = "No id specified!";

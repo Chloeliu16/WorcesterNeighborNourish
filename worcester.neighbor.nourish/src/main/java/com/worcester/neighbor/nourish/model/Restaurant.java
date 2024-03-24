@@ -1,8 +1,6 @@
 package com.worcester.neighbor.nourish.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +18,11 @@ public class Restaurant {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    // unique name for login
-    String restaurantId;
-    // complete name for display
-    String restaurantName;
+    String restusername;
+    String restname;
+    String email;
     String password;
     String phone;
     String address;
+
 }

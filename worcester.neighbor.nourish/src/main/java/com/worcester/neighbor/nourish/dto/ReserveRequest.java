@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReserveRequest {
     String user;
-    String restaurant;
-    String food;
+    String restName;
+    String foodType;
+    String foodName;
     int amount;
 }

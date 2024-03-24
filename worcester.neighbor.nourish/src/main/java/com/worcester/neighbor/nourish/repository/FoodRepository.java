@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
     List<Food> findAll();
-    Food findByRestaurantAndFood(String restaurant, String food);
+//    Food findByRusernameAndFoodtypeAndFoodname(String rusername, String foodtype, String foodname);
+    Food findByRestusernameAndFoodtypeAndFoodname(String restusername, String foodtype, String foodname);
     Food saveAndFlush(Food food);
 }
