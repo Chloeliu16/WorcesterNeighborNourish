@@ -24,8 +24,9 @@ public class ReserveFood {
     public ReserveResponse reserve(@RequestBody ReserveRequest reserveRequest) {
         ReserveResponse reserveResponse = new ReserveResponse();
         FoodInfo foodInfo = new FoodInfo();
-        foodInfo.setRestaurant(reserveRequest.getRestaurant());
-        foodInfo.setFood(reserveRequest.getFood());
+        foodInfo.setRestName(reserveRequest.getRestName());
+        foodInfo.setFoodType(reserveRequest.getFoodType());
+        foodInfo.setFoodName(reserveRequest.getFoodName());
         foodInfo.setAmount(reserveRequest.getAmount());
         String reserveOutput = reserveService.reserveFood(foodInfo, reserveRequest.getUser());
         if (reserveOutput != "") {

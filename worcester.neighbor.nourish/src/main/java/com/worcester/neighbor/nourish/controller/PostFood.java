@@ -23,8 +23,11 @@ public class PostFood {
     public PostResponse post(@RequestBody PostRequest postRequest) {
         PostResponse postResponse = new PostResponse();
         FoodInfo foodInfo = new FoodInfo();
-        foodInfo.setRestaurant(postRequest.getRestaurant());
-        foodInfo.setFood(postRequest.getFood());
+        System.out.println("restaurant name: " + postRequest.getRestName());
+        foodInfo.setRestName(postRequest.getRestName());
+        foodInfo.setRestUserName(postRequest.getRestUserName());
+        foodInfo.setFoodName(postRequest.getFoodName());
+        foodInfo.setFoodType(postRequest.getFoodType());
         foodInfo.setAmount(postRequest.getAmount());
         postResponse.setSuccess(postService.postFood(foodInfo));
         return postResponse;

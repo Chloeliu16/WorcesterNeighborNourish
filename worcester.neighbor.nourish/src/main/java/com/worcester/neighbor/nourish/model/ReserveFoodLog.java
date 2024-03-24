@@ -21,8 +21,10 @@ public class ReserveFoodLog {
     private Long id;
 
     String userName;
-    String restaurant;
-    String food;
+    String restName;
+    String foodType;
+    String foodName;
     int amount;
     boolean success;
+    String status = "waiting";
 }

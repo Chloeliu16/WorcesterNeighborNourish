@@ -1,8 +1,6 @@
 package com.worcester.neighbor.nourish.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +13,15 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Customer {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    // unique name for login
-    String userId;
-    // complete name for display
-    String userName;
+    String cususername;
+    String cusname;
+    String email;
     String password;
     String phone;
+
 }

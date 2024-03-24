@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     // check if restaurantId is used
-    Restaurant findByRestaurantId(String restaurantId);
+    Restaurant findByRestusername(String restusername);
     // for login
-    Restaurant findByRestaurantIdAndPassword(String restaurantId, String password);
+
+    Restaurant findByRestusernameAndPassword(String restusername, String password);
     // for register
+    Restaurant findByRestname(String restname);
     Restaurant saveAndFlush(Restaurant restaurant);
 }

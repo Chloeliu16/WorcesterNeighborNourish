@@ -20,7 +20,8 @@ public class Food {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    String restaurant;
-    String food;
+    String restusername;
+    String foodname;
+    String foodtype;
     int amount;
 }
