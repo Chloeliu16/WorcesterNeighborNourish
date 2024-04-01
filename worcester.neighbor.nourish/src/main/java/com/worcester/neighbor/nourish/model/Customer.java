@@ -20,8 +20,7 @@ public class Customer {
 
     String cususername;
     String cusname;
-    String email;
     String password;
+    String email;
     String phone;
-
 }

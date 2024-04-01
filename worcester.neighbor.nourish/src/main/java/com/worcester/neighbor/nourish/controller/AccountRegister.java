@@ -21,31 +21,32 @@ public class AccountRegister {
         String registerOutput = "No registration info!";
 
         if (registerRequest != null) {
-            if (registerRequest.getRestUserName() != null) {
-                registerOutput = registerService.registerRestaurant(
-                        registerRequest.getRestUserName(),
-                        registerRequest.getRestName(),
-                        registerRequest.getPassword(),
-                        registerRequest.getPhone(),
-                        registerRequest.getAddress(),
-                        registerRequest.getEmail()
-                );
-            } else if (registerRequest.getCusUserName() != null) {
+            if (registerRequest.getAccountType() == 1) {
                 registerOutput = registerService.registerCustomer(
-                        registerRequest.getCusUserName(),
-                        registerRequest.getCusName(),
+                        registerRequest.getUsername(),
+                        registerRequest.getName(),
                         registerRequest.getPassword(),
                         registerRequest.getPhone(),
                         registerRequest.getEmail()
                 );
-            } else if (registerRequest.getOrgUserName() !=null) {
-                registerOutput = registerService.registerOrganization(
-                        registerRequest.getOrgUserName(),
-                        registerRequest.getOrgName(),
+            } else if (registerRequest.getAccountType() == 2) {
+                registerOutput = registerService.registerRestaurant(
+                        registerRequest.getUsername(),
+                        registerRequest.getName(),
                         registerRequest.getPassword(),
-                        registerRequest.getType(),
+                        registerRequest.getPhone(),
                         registerRequest.getEmail(),
-                        registerRequest.getCertificateNum()
+                        registerRequest.getAddress(),
+                        registerRequest.getCertificate()
+                );
+            } else if (registerRequest.getAccountType() == 3) {
+                registerOutput = registerService.registerOrganization(
+                        registerRequest.getUsername(),
+                        registerRequest.getName(),
+                        registerRequest.getPassword(),
+                        registerRequest.getPhone(),
+                        registerRequest.getEmail(),
+                        registerRequest.getAddress()
                 );
             } else {
                 registerOutput = "No id specified!";

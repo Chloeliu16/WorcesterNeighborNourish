@@ -20,9 +20,9 @@ public class Restaurant {
 
     String restusername;
     String restname;
-    String email;
     String password;
+    String email;
     String phone;
     String address;
-
+    String certificate;
 }

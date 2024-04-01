@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostResponse {
     boolean success = true;
+    String failureReason;
 }

@@ -19,23 +19,25 @@ public class ReserveService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public String reserveFood(FoodInfo foodInfo, String user) {
+    public String reserveFood(
+            String supplierUsername,
+            int supplierType,
+            String foodName,
+            int reserveAmount
+    ) {
         try {
-            String rname = foodInfo.getRestName();
-            Restaurant rest = restaurantRepository.findByRestname(rname);
-            String rusername = rest.getRestusername();
-            Food food = foodRepository.findByRestusernameAndFoodtypeAndFoodname(rusername, foodInfo.getFoodType(), foodInfo.getFoodName());
-            if (food == null || food.getAmount() < foodInfo.getAmount()) {
+            Food food = foodRepository.findBySupplierUsernameAndSupplierTypeAndFoodName(supplierUsername, supplierType, foodName);
+            if (food == null || food.getAmount() < reserveAmount) {
                 return "No food or not enough food available!";
             } else {
-                food.setAmount(food.getAmount() - foodInfo.getAmount());
+                food.setAmount(food.getAmount() - reserveAmount);
             }
             foodRepository.saveAndFlush(food);
             return "";
         }
         catch(Exception e) {
             e.printStackTrace();
-            return "ReserveFood Failed!";
+            return "Reserve food failed!";
         }
     }
 }

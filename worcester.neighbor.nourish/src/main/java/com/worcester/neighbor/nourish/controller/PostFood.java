@@ -22,14 +22,21 @@ public class PostFood {
     @PostMapping
     public PostResponse post(@RequestBody PostRequest postRequest) {
         PostResponse postResponse = new PostResponse();
-        FoodInfo foodInfo = new FoodInfo();
-        System.out.println("restaurant name: " + postRequest.getRestName());
-        foodInfo.setRestName(postRequest.getRestName());
-        foodInfo.setRestUserName(postRequest.getRestUserName());
-        foodInfo.setFoodName(postRequest.getFoodName());
-        foodInfo.setFoodType(postRequest.getFoodType());
-        foodInfo.setAmount(postRequest.getAmount());
-        postResponse.setSuccess(postService.postFood(foodInfo));
+        String postOutput = "No post info!";
+        if (postRequest != null) {
+            postOutput = postService.postFood(
+                    postRequest.getSupplierUsername(),
+                    postRequest.getSupplierType(),
+                    postRequest.getFoodName(),
+                    postRequest.getFoodType(),
+                    postRequest.getFoodIngredients(),
+                    postRequest.getAmount()
+            );
+        }
+        if (postOutput != "") {
+            postResponse.setSuccess(false);
+            postResponse.setFailureReason(postOutput);
+        }
         return postResponse;
     }
 }

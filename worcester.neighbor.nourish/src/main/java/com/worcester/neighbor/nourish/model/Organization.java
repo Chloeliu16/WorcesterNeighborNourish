@@ -19,8 +19,8 @@ public class Organization {
 
         String orgusername;
         String orgname;
-        String email;
         String password;
-        String type;
-        String certificateNum;
+        String email;
+        String phone;
+        String address;
 }
