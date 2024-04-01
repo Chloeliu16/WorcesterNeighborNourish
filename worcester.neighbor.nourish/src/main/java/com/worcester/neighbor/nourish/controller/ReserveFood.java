@@ -23,12 +23,15 @@ public class ReserveFood {
     @PostMapping
     public ReserveResponse reserve(@RequestBody ReserveRequest reserveRequest) {
         ReserveResponse reserveResponse = new ReserveResponse();
-        FoodInfo foodInfo = new FoodInfo();
-        foodInfo.setRestName(reserveRequest.getRestName());
-        foodInfo.setFoodType(reserveRequest.getFoodType());
-        foodInfo.setFoodName(reserveRequest.getFoodName());
-        foodInfo.setAmount(reserveRequest.getAmount());
-        String reserveOutput = reserveService.reserveFood(foodInfo, reserveRequest.getUser());
+        String reserveOutput = "No reserve info!";
+        if (reserveRequest != null) {
+            reserveOutput = reserveService.reserveFood(
+                    reserveRequest.getSupplierUsername(),
+                    reserveRequest.getSupplierType(),
+                    reserveRequest.getFoodName(),
+                    reserveRequest.getAmount()
+            );
+        }
         if (reserveOutput != "") {
             reserveResponse.setSuccess(false);
             reserveResponse.setFailureReason(reserveOutput);

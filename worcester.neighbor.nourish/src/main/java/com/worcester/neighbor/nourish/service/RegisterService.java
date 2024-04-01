@@ -28,21 +28,23 @@ public class RegisterService {
             String restName,
             String password,
             String phone,
+            String email,
             String address,
-            String email
+            String certificate
     ) {
         try {
             Restaurant exist = restaurantRepository.findByRestusername(restUserName);
             if (exist != null) {
-                return "Not unique register id!";
+                return "Not unique username!";
             }
             Restaurant account = new Restaurant();
             account.setRestusername(restUserName);
             account.setRestname(restName);
             account.setPassword(password);
             account.setPhone(phone);
-            account.setAddress(address);
             account.setEmail(email);
+            account.setAddress(address);
+            account.setCertificate(certificate);
             restaurantRepository.saveAndFlush(account);
             return "";
         }
@@ -83,9 +85,9 @@ public class RegisterService {
             String orgUserName,
             String orgName,
             String password,
-            String type,
+            String phone,
             String email,
-            String certificateNum
+            String address
     ) {
         try {
             Organization exist = organizationRepository.findByOrgusername(orgUserName);
@@ -97,8 +99,8 @@ public class RegisterService {
             account.setOrgname(orgName);
             account.setPassword(password);
             account.setEmail(email);
-            account.setType(type);
-            account.setCertificateNum(certificateNum);
+            account.setPhone(phone);
+            account.setAddress(address);
             organizationRepository.saveAndFlush(account);
             return "";
         }
@@ -107,5 +109,4 @@ public class RegisterService {
             return "Register Failed!";
         }
     }
-
 }

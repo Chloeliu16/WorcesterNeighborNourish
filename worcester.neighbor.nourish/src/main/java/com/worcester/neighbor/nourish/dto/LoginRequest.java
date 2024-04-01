@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginRequest {
+    String username;
     String password;
-    String userNameId;
-    // 1 for restaurant, 2 for user, 3 for organization
+    // 1 for customer, 2 for restaurant, 3 for organization
     int accountType;
 }

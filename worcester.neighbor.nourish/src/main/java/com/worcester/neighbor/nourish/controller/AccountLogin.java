@@ -17,27 +17,24 @@ public class AccountLogin {
     @Autowired
     public AccountLogin(LoginService loginService) { this.loginService = loginService; }
 
-    @GetMapping
+    @PostMapping
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         LoginResponse loginResponse = new LoginResponse();
         String loginOutput = "No login info!";
-//        System.out.print("type: " + loginRequest.getAccountType());
-//        System.out.print("username: " + loginRequest.getUserNameId());
-//        System.out.print("password: " + loginRequest.getPassword());
         if (loginRequest != null) {
             if (loginRequest.getAccountType() == 1) {
-                loginOutput = loginService.loginRestaurant(
-                        loginRequest.getUserNameId(),
+                loginOutput = loginService.loginCustomer(
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 );
             } else if (loginRequest.getAccountType() == 2) {
-                loginOutput = loginService.loginCustomer(
-                        loginRequest.getUserNameId(),
+                loginOutput = loginService.loginRestaurant(
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 );
             } else if (loginRequest.getAccountType() == 3) {
                 loginOutput = loginService.loginOrgnization(
-                        loginRequest.getUserNameId(),
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 );
             } else {

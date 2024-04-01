@@ -15,26 +15,35 @@ public class PostService {
         this.foodRepository = foodRepository;
     }
 
-    public boolean postFood(FoodInfo foodInfo) {
+    public String postFood(
+            String supplierUsername,
+            int supplierType,
+            String foodName,
+            String foodType,
+            String foodIngredients,
+            int postAmount
+    ) {
         try {
-            Food food = foodRepository.findByRestusernameAndFoodtypeAndFoodname(foodInfo.getRestUserName(), foodInfo.getFoodType(), foodInfo.getFoodName());
+            Food food = foodRepository.findBySupplierUsernameAndSupplierTypeAndFoodName(supplierUsername, supplierType, foodName);
             if (food != null) {
                 int amount = food.getAmount();
-                amount += foodInfo.getAmount();
+                amount += postAmount;
                 food.setAmount(amount);
             } else {
                 food = new Food();
-                food.setRestusername(foodInfo.getRestUserName());
-                food.setFoodname(foodInfo.getFoodName());
-                food.setFoodtype(foodInfo.getFoodType());
-                food.setAmount(foodInfo.getAmount());
+                food.setSupplierUsername(supplierUsername);
+                food.setSupplierType(supplierType);
+                food.setFoodName(foodName);
+                food.setFoodType(foodType);
+                food.setFoodIngredients(foodIngredients);
+                food.setAmount(postAmount);
             }
             foodRepository.saveAndFlush(food);
-            return true;
+            return "";
         }
         catch(Exception e) {
             e.printStackTrace();
-            return false;
+            return "Post food failed!";
         }
     }
 }
