@@ -1,7 +1,7 @@
 package com.worcester.neighbor.nourish.controller;
 
-import com.worcester.neighbor.nourish.dto.RegisterRequest;
-import com.worcester.neighbor.nourish.dto.RegisterResponse;
+import com.worcester.neighbor.nourish.dto.request.RegisterRequest;
+import com.worcester.neighbor.nourish.dto.response.RegisterResponse;
 import com.worcester.neighbor.nourish.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

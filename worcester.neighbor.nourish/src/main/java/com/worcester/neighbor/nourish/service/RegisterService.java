@@ -1,11 +1,11 @@
 package com.worcester.neighbor.nourish.service;
 
-import com.worcester.neighbor.nourish.model.Organization;
-import com.worcester.neighbor.nourish.model.Restaurant;
-import com.worcester.neighbor.nourish.model.Customer;
-import com.worcester.neighbor.nourish.repository.OrganizationRepository;
-import com.worcester.neighbor.nourish.repository.RestaurantRepository;
-import com.worcester.neighbor.nourish.repository.CustomerRepository;
+import com.worcester.neighbor.nourish.model.organization.Organization;
+import com.worcester.neighbor.nourish.model.restaurant.Restaurant;
+import com.worcester.neighbor.nourish.model.customer.Customer;
+import com.worcester.neighbor.nourish.repository.organization.OrganizationRepository;
+import com.worcester.neighbor.nourish.repository.restaurant.RestaurantRepository;
+import com.worcester.neighbor.nourish.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
