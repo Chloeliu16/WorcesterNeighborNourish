@@ -1,12 +1,10 @@
 package com.worcester.neighbor.nourish.controller;
 
-import com.worcester.neighbor.nourish.dto.LoginRequest;
-import com.worcester.neighbor.nourish.dto.LoginResponse;
+import com.worcester.neighbor.nourish.dto.request.LoginRequest;
+import com.worcester.neighbor.nourish.dto.response.LoginResponse;
 import com.worcester.neighbor.nourish.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/login")
