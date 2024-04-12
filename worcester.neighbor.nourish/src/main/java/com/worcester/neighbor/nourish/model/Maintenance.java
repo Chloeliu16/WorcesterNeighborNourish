@@ -23,4 +23,5 @@ public class Maintenance {
     String name;
     String email;
     String phone;
+    String responsibility;
 }

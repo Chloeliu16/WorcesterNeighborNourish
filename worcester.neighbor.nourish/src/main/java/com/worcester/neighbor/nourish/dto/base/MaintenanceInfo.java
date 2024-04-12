@@ -11,4 +11,5 @@ public class MaintenanceInfo {
     String name;
     String email;
     String phone;
+    String responsibility;
 }

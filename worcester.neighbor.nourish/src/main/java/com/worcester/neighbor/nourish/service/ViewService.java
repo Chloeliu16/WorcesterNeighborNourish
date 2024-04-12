@@ -168,6 +168,7 @@ public class ViewService {
                 tmp.setName(maintenance.getName());
                 tmp.setPhone(maintenance.getPhone());
                 tmp.setEmail(maintenance.getEmail());
+                tmp.setResponsibility(maintenance.getResponsibility());
                 allMaintenanceInfo.add(tmp);
             }
             return allMaintenanceInfo;
