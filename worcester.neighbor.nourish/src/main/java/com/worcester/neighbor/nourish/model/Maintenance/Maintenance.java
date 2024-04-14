@@ -1,4 +1,4 @@
-package com.worcester.neighbor.nourish.model;
+package com.worcester.neighbor.nourish.model.Maintenance;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

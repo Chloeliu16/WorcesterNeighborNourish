@@ -11,11 +11,19 @@ import com.worcester.neighbor.nourish.model.restaurant.Food;
 import com.worcester.neighbor.nourish.model.restaurant.Restaurant;
 import com.worcester.neighbor.nourish.repository.customer.CustomerRepository;
 import com.worcester.neighbor.nourish.repository.organization.OrganizationRepository;
+import com.worcester.neighbor.nourish.repository.restaurant.CategoryRepository;
+import com.worcester.neighbor.nourish.repository.restaurant.FoodRepository;
 import com.worcester.neighbor.nourish.repository.restaurant.RestaurantRepository;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static jakarta.persistence.FetchType.LAZY;
 
 @Service
 public class PostService {
@@ -23,15 +31,23 @@ public class PostService {
     private final RestaurantRepository restaurantRepository;
     private final OrganizationRepository organizationRepository;
 
+    private final CategoryRepository categoryRepository;
+
+    private final FoodRepository foodRepository;
+
     @Autowired
     public PostService(
             CustomerRepository customerRepository,
             RestaurantRepository restaurantRepository,
-            OrganizationRepository organizationRepository
+            OrganizationRepository organizationRepository,
+            CategoryRepository categoryRepository,
+            FoodRepository foodRepository
             ) {
         this.customerRepository = customerRepository;
         this.restaurantRepository = restaurantRepository;
         this.organizationRepository = organizationRepository;
+        this.categoryRepository = categoryRepository;
+        this.foodRepository = foodRepository;
     }
 
     public String postFood(
@@ -42,37 +58,43 @@ public class PostService {
             int postAmount
     ) {
         try {
-            Restaurant restaurant = restaurantRepository.findByRestusername(restUsername);
-            List<Food> allFoods = restaurant.getFoods();
-            boolean existFood = false;
-            for (int i = 0; i < allFoods.size(); i++) {
-                Food tmp = allFoods.get(i);
-                if (tmp.getFoodName() == foodName) {
-                    tmp.setAmount(tmp.getAmount() + postAmount);
-                    allFoods.set(i, tmp);
-                    existFood = true;
-                    break;
-                }
+            Category category = categoryRepository.findByFoodtypeAndFoodingredients(foodType, foodIngredients);
+            if (category == null) {
+                category = new Category();
+                category.setFoodtype(foodType);
+                category.setFoodingredients(foodIngredients);
+                categoryRepository.saveAndFlush(category);
+                // This is to get the id column
+                category = categoryRepository.findByFoodtypeAndFoodingredients(foodType, foodIngredients);
             }
 
-            if (!existFood) {
-                Food food = new Food();
+            Restaurant restaurant = restaurantRepository.findByRestusername(restUsername);
+            Food food = foodRepository.findByRestUsernameAndFoodName(restUsername, foodName);
+            if (food == null) {
+                food = new Food();
                 food.setRestUsername(restUsername);
                 food.setFoodName(foodName);
-
-                Category category = new Category();
-                category.setFoodType(foodType);
-                category.setFoodIngredients(foodIngredients);
-                category.setFood(food);
-
-                food.setCategory(category);
                 food.setAmount(postAmount);
-                food.setRestaurant(restaurant);
-                allFoods.add(food);
-            }
 
-            restaurant.setFoods(allFoods);
-            restaurantRepository.saveAndFlush(restaurant);
+                List<Food> foods = category.getFoods();
+                if (foods == null) {
+                    foods = new ArrayList<>();
+                }
+                foods.add(food);
+                category.setFoods(foods);
+                food.setCategory(category);
+
+                foods = restaurant.getFoods();
+                if (foods == null) {
+                    foods = new ArrayList<>();
+                }
+                foods.add(food);
+                restaurant.setFoods(foods);
+                food.setRestaurant(restaurant);
+            } else {
+                food.setAmount(food.getAmount() + postAmount);
+            }
+            foodRepository.saveAndFlush(food);
             return "";
         }
         catch(Exception e) {

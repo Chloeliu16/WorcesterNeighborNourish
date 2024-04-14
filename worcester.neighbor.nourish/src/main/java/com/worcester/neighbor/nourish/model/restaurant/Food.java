@@ -24,7 +24,7 @@ public class Food {
     int amount;
     String restUsername;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
 

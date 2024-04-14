@@ -4,7 +4,7 @@ import com.worcester.neighbor.nourish.dto.base.ActivityInfo;
 import com.worcester.neighbor.nourish.dto.base.FoodInfo;
 import com.worcester.neighbor.nourish.dto.base.MaintenanceInfo;
 import com.worcester.neighbor.nourish.dto.base.OrderInfo;
-import com.worcester.neighbor.nourish.model.Maintenance;
+import com.worcester.neighbor.nourish.model.Maintenance.Maintenance;
 import com.worcester.neighbor.nourish.model.organization.Activity;
 import com.worcester.neighbor.nourish.model.restaurant.Food;
 import com.worcester.neighbor.nourish.model.restaurant.FoodOrder;
@@ -48,8 +48,8 @@ public class ViewService {
                     food.getRestaurant().getEmail(),
                     food.getRestaurant().getAddress(),
                     food.getFoodName(),
-                    food.getCategory().getFoodType(),
-                    food.getCategory().getFoodIngredients(),
+                    food.getCategory().getFoodtype(),
+                    food.getCategory().getFoodingredients(),
                     food.getAmount()
             );
             allFoodInfo.add(foodInfo);
