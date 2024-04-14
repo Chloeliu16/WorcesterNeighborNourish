@@ -1,7 +1,6 @@
 package com.worcester.neighbor.nourish.repository;
 
-import com.worcester.neighbor.nourish.model.Maintenance;
-import com.worcester.neighbor.nourish.model.restaurant.Restaurant;
+import com.worcester.neighbor.nourish.model.Maintenance.Maintenance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

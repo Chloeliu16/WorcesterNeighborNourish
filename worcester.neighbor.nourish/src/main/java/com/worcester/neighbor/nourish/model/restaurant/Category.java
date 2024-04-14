@@ -1,14 +1,14 @@
 package com.worcester.neighbor.nourish.model.restaurant;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -21,9 +21,9 @@ public class Category {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    String foodType;
-    String foodIngredients;
+    String foodtype;
+    String foodingredients;
 
-    @OneToOne(mappedBy = "category")
-    Food food;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    List<Food> foods;
 }
