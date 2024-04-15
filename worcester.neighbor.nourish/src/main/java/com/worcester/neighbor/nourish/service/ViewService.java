@@ -7,10 +7,10 @@ import com.worcester.neighbor.nourish.dto.base.OrderInfo;
 import com.worcester.neighbor.nourish.model.Maintenance.Maintenance;
 import com.worcester.neighbor.nourish.model.organization.Activity;
 import com.worcester.neighbor.nourish.model.restaurant.Food;
-import com.worcester.neighbor.nourish.model.restaurant.FoodOrder;
+import com.worcester.neighbor.nourish.model.restaurant.ReserveFood;
 import com.worcester.neighbor.nourish.repository.MaintenanceRepository;
-import com.worcester.neighbor.nourish.repository.organization.InfoRepository;
-import com.worcester.neighbor.nourish.repository.restaurant.FoodOrderRepository;
+import com.worcester.neighbor.nourish.repository.organization.ActivityRepository;
+import com.worcester.neighbor.nourish.repository.restaurant.ReserveFoodRepository;
 import com.worcester.neighbor.nourish.repository.restaurant.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,20 +21,20 @@ import java.util.List;
 @Service
 public class ViewService {
     private final FoodRepository foodRepository;
-    private final InfoRepository infoRepository;
-    private final FoodOrderRepository foodOrderRepository;
+    private final ActivityRepository activityRepository;
+    private final ReserveFoodRepository reserveFoodRepository;
     private final MaintenanceRepository maintenanceRepository;
 
     @Autowired
     public ViewService(
             FoodRepository  foodRepository,
-            InfoRepository infoRepository,
-            FoodOrderRepository foodOrderRepository,
+            ActivityRepository activityRepository,
+            ReserveFoodRepository reserveFoodRepository,
             MaintenanceRepository maintenanceRepository
     ) {
         this.foodRepository = foodRepository;
-        this.infoRepository = infoRepository;
-        this.foodOrderRepository = foodOrderRepository;
+        this.activityRepository = activityRepository;
+        this.reserveFoodRepository = reserveFoodRepository;
         this.maintenanceRepository = maintenanceRepository;
     }
 
@@ -99,7 +99,7 @@ public class ViewService {
     }
     public List<ActivityInfo> viewActivity() {
         try {
-            List<Activity> allActivities = this.infoRepository.findAll();
+            List<Activity> allActivities = this.activityRepository.findAll();
             return parseActivity(allActivities);
         }
         catch(Exception e) {
@@ -110,7 +110,7 @@ public class ViewService {
 
     public List<ActivityInfo> viewActivity(String orgUsername) {
         try {
-            List<Activity> allActivities = this.infoRepository.findByOrgUsername(orgUsername);
+            List<Activity> allActivities = this.activityRepository.findByOrgUsername(orgUsername);
             return parseActivity(allActivities);
         }
         catch(Exception e) {
@@ -119,9 +119,9 @@ public class ViewService {
         }
     }
 
-    private List<OrderInfo> parseFoodOrder(List<FoodOrder> orders) {
+    private List<OrderInfo> parseFoodOrder(List<ReserveFood> orders) {
         List<OrderInfo> out = new ArrayList<>();
-        for (FoodOrder order:orders) {
+        for (ReserveFood order:orders) {
             OrderInfo orderInfo = new OrderInfo();
             orderInfo.setOrderNum(order.getOrderNum());
             orderInfo.setCusName(order.getCustomer().getCusname());
@@ -137,7 +137,7 @@ public class ViewService {
             String cusUsername
     ) {
         try {
-            List<FoodOrder> allOrders = this.foodOrderRepository.findByCusUsername(cusUsername);
+            List<ReserveFood> allOrders = this.reserveFoodRepository.findByCusUsername(cusUsername);
             return parseFoodOrder(allOrders);
         }
         catch(Exception e) {
@@ -150,7 +150,7 @@ public class ViewService {
             String restUsername
     ) {
         try {
-            List<FoodOrder> allOrders = this.foodOrderRepository.findByRestUsername(restUsername);
+            List<ReserveFood> allOrders = this.reserveFoodRepository.findByRestUsername(restUsername);
             return parseFoodOrder(allOrders);
         }
         catch(Exception e) {

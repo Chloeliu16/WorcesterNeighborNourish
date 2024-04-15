@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -14,26 +16,19 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Activity {
+public class PostActivity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    String activityName;
-    String orgUsername;
+    String status;
+    Timestamp timestamp;
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "detail_id")
-    Detail detail;
+    @JoinColumn(name = "activity_id")
+    Activity activity;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id")
-    Contact contact;
-
-    @ManyToOne
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "organization_id")
     Organization organization;
-
-    @OneToOne(mappedBy = "activity")
-    PostActivity postActivity;
 }

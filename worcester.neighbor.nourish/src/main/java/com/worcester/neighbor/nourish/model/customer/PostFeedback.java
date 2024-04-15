@@ -1,10 +1,12 @@
-package com.worcester.neighbor.nourish.model.organization;
+package com.worcester.neighbor.nourish.model.customer;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.sql.Timestamp;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -14,26 +16,19 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Activity {
+public class PostFeedback {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    String activityName;
-    String orgUsername;
+    Timestamp timestamp;
+    String status;
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "detail_id")
-    Detail detail;
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id")
-    Contact contact;
+    @JoinColumn(name = "feedback_id")
+    Feedback feedback;
 
     @ManyToOne
-    @JoinColumn(name = "organization_id")
-    Organization organization;
-
-    @OneToOne(mappedBy = "activity")
-    PostActivity postActivity;
+    @JoinColumn(name="customer_id")
+    Customer customer;
 }

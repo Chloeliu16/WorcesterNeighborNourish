@@ -1,13 +1,13 @@
 package com.worcester.neighbor.nourish.model.Supplier;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.worcester.neighbor.nourish.model.restaurant.Restaurant;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
@@ -15,12 +15,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Supplier {
-
     @Id
-    private String foodSafetyCertification;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
 
-    private String type;
-    private String name;
-    private String email;
-    private String phone;
+    String foodSafetyCertification;
+    String type;
+    String name;
+    String email;
+    String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    Restaurant restaurant;
 }

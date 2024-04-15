@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SupplierAddRequest {
-
+    String restUsername;
     String foodSafetyCertification;
     String type;
     String name;

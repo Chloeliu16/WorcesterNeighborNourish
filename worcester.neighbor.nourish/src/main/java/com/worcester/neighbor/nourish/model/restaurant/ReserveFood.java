@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodOrder {
+public class ReserveFood {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -25,6 +27,7 @@ public class FoodOrder {
     String restUsername;
     String foodName;
     int amount;
+    Timestamp timstamp;
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")

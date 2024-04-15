@@ -1,6 +1,6 @@
 package com.worcester.neighbor.nourish.model.customer;
 
-import com.worcester.neighbor.nourish.model.restaurant.FoodOrder;
+import com.worcester.neighbor.nourish.model.restaurant.ReserveFood;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,8 +29,11 @@ public class Customer {
     String phone;
 
     @OneToMany(mappedBy = "customer", fetch = LAZY, cascade = CascadeType.ALL)
+    List<ReserveFood> reserveFoods;
+
+    @OneToMany(mappedBy = "customer", fetch = LAZY, cascade = CascadeType.ALL)
     List<Feedback> feedbacks;
 
     @OneToMany(mappedBy = "customer", fetch = LAZY, cascade = CascadeType.ALL)
-    List<FoodOrder> foodOrders;
+    List<PostFeedback> posts;
 }
