@@ -1,5 +1,6 @@
 package com.worcester.neighbor.nourish.controller;
 
+import ch.qos.logback.core.util.SystemInfo;
 import com.worcester.neighbor.nourish.dto.request.SupplierAddRequest;
 import com.worcester.neighbor.nourish.dto.request.VolunteerRequest;
 import com.worcester.neighbor.nourish.dto.response.SupplierAddResponse;
@@ -18,10 +19,12 @@ public class SupplierAdd {
     @PostMapping
     public SupplierAddResponse supplierAdd(@RequestBody SupplierAddRequest supplierAddRequest) {
         SupplierAddResponse supplierAddResponse = new SupplierAddResponse();
+        System.out.println(supplierAddRequest);
         String supplierAddOutput = "No supplier info";
 
         if(supplierAddRequest != null) {
             supplierAddOutput = supplierAddService.add(
+                    supplierAddRequest.getRestUsername(),
                     supplierAddRequest.getFoodSafetyCertification(),
                     supplierAddRequest.getType(),
                     supplierAddRequest.getName(),
@@ -35,5 +38,4 @@ public class SupplierAdd {
         }
         return supplierAddResponse;
     }
-
 }

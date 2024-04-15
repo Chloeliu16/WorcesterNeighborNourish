@@ -2,34 +2,35 @@ package com.worcester.neighbor.nourish.service;
 
 import com.worcester.neighbor.nourish.model.customer.Customer;
 import com.worcester.neighbor.nourish.model.restaurant.Food;
-import com.worcester.neighbor.nourish.model.restaurant.FoodOrder;
+import com.worcester.neighbor.nourish.model.restaurant.ReserveFood;
 import com.worcester.neighbor.nourish.model.restaurant.Restaurant;
 import com.worcester.neighbor.nourish.model.restaurant.Status;
 import com.worcester.neighbor.nourish.repository.customer.CustomerRepository;
-import com.worcester.neighbor.nourish.repository.restaurant.FoodOrderRepository;
+import com.worcester.neighbor.nourish.repository.restaurant.ReserveFoodRepository;
 import com.worcester.neighbor.nourish.repository.restaurant.FoodRepository;
 import com.worcester.neighbor.nourish.repository.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Random;
 
 @Service
 public class ReserveService {
     private final FoodRepository foodRepository;
-    private final FoodOrderRepository foodOrderRepository;
+    private final ReserveFoodRepository reserveFoodRepository;
     private final RestaurantRepository restaurantRepository;
     private final CustomerRepository customerRepository;
 
     @Autowired
     public ReserveService(
             FoodRepository  foodRepository,
-            FoodOrderRepository foodOrderRepository,
+            ReserveFoodRepository reserveFoodRepository,
             RestaurantRepository restaurantRepository,
             CustomerRepository customerRepository
     ) {
         this.foodRepository = foodRepository;
-        this.foodOrderRepository = foodOrderRepository;
+        this.reserveFoodRepository = reserveFoodRepository;
         this.restaurantRepository = restaurantRepository;
         this.customerRepository = customerRepository;
     }
@@ -73,25 +74,26 @@ public class ReserveService {
              String orderStatus
     ) {
         try {
-            FoodOrder foodOrder = new FoodOrder();
+            ReserveFood reserveFood = new ReserveFood();
             Restaurant restaurant = restaurantRepository.findByRestusername(restUsername);
             Customer customer = customerRepository.findByCususername(cusUsername);
-            foodOrder.setFoodName(foodName);
-            foodOrder.setCusUsername(cusUsername);
-            foodOrder.setRestUsername(restUsername);
-            foodOrder.setAmount(amount);
+            reserveFood.setFoodName(foodName);
+            reserveFood.setCusUsername(cusUsername);
+            reserveFood.setRestUsername(restUsername);
+            reserveFood.setAmount(amount);
+            reserveFood.setTimstamp(new Timestamp(System.currentTimeMillis()));
 
             Status status = new Status();
             status.setOrderStatus(orderStatus);
-            status.setFoodOrder(foodOrder);
-            foodOrder.setStatus(status);
+            status.setReserveFood(reserveFood);
+            reserveFood.setStatus(status);
 
-            foodOrder.setRestaurant(restaurant);
-            foodOrder.setCustomer(customer);
+            reserveFood.setRestaurant(restaurant);
+            reserveFood.setCustomer(customer);
 
             String orderNum = generateOrderNum();
-            foodOrder.setOrderNum(orderNum);
-            foodOrderRepository.saveAndFlush(foodOrder);
+            reserveFood.setOrderNum(orderNum);
+            reserveFoodRepository.saveAndFlush(reserveFood);
             return orderNum;
         }
         catch(Exception e) {

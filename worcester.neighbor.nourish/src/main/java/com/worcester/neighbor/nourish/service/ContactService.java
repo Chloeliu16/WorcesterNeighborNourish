@@ -1,19 +1,17 @@
 package com.worcester.neighbor.nourish.service;
 
-import com.worcester.neighbor.nourish.model.donation.Donation;
-import com.worcester.neighbor.nourish.model.faqs.ContactHistory;
-import com.worcester.neighbor.nourish.repository.donation.DonationRepository;
-import com.worcester.neighbor.nourish.repository.faqs.ContactRepository;
+import com.worcester.neighbor.nourish.model.faqs.FaqContact;
+import com.worcester.neighbor.nourish.repository.faqs.FaqContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
-    private final ContactRepository contactRepository;
+    private final FaqContactRepository faqContactRepository;
 
     @Autowired
-    public ContactService(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
+    public ContactService(FaqContactRepository faqContactRepository) {
+        this.faqContactRepository = faqContactRepository;
     }
 
     public String contactAdd(
@@ -23,12 +21,12 @@ public class ContactService {
             String detail)
     {
         try {
-            ContactHistory contactHistory = new ContactHistory();
-            contactHistory.setType(type);
-            contactHistory.setEmail(email);
-            contactHistory.setName(name);
-            contactHistory.setDetail(detail);
-            contactRepository.saveAndFlush(contactHistory);
+            FaqContact faqContact = new FaqContact();
+            faqContact.setType(type);
+            faqContact.setEmail(email);
+            faqContact.setName(name);
+            faqContact.setDetail(detail);
+            faqContactRepository.saveAndFlush(faqContact);
             return "";
         } catch (Exception e) {
             e.printStackTrace();

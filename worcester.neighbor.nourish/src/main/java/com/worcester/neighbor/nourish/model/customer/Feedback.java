@@ -25,4 +25,7 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name="customer_id")
     Customer customer;
+
+    @OneToOne(mappedBy = "feedback")
+    PostFeedback postFeedback;
 }

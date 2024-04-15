@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface InfoRepository extends JpaRepository<Activity, Long> {
+public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> findAll();
     List<Activity> findByOrgUsername(String orgUsername);
     Activity saveAndFlush(Activity activity);

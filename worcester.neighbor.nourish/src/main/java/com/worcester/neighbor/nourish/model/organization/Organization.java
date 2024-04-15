@@ -29,4 +29,7 @@ public class Organization {
 
         @OneToMany(mappedBy = "organization", fetch = LAZY, cascade = CascadeType.ALL)
         List<Activity> activities;
+
+        @OneToMany(mappedBy = "organization", fetch = LAZY, cascade = CascadeType.ALL)
+        List<PostActivity> posts;
 }

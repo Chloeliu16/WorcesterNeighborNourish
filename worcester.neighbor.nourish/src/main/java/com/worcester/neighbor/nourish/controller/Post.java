@@ -44,7 +44,7 @@ public class Post {
         PostResponse postResponse = new PostResponse();
         String postOutput = "No post info!";
         if (postActivityRequest != null) {
-            postOutput = postService.postInfo(
+            postOutput = postService.postActivity(
                     postActivityRequest.getActivity().getOrgUsername(),
                     postActivityRequest.getActivity().getActivityName(),
                     postActivityRequest.getActivity().getAddress(),

@@ -22,6 +22,8 @@ public class Volunteer {
 
     @PostMapping
     public VolunteerResponse volunteerRegister(@RequestBody VolunteerRequest volunteerRequest) {
+        System.out.println("Hello, world!");
+        System.out.println(volunteerRequest);
         VolunteerResponse volunteerResponse = new VolunteerResponse();
         String volunteerOutput = "No volunteer info!";
 
